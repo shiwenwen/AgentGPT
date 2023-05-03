@@ -17,11 +17,19 @@ else
   exit
 fi
 
+echo -n "Enter next auth url or press enter to continue with http://localhost:3000: "
+read NEXTAUTH_URL
+
+if [ -z "$NEXTAUTH_URL" ]
+then
+  NEXTAUTH_URL="http://localhost:3000"
+fi
+
 NEXTAUTH_SECRET=$(openssl rand -base64 32)
 
 ENV="NODE_ENV=development\n\
 NEXTAUTH_SECRET=$NEXTAUTH_SECRET\n\
-NEXTAUTH_URL=http://localhost:3000\n\
+NEXTAUTH_URL=$NEXTAUTH_URL\n\
 OPENAI_API_KEY=$OPENAI_API_KEY\n\
 DATABASE_URL=file:../db/db.sqlite\n"
 
