@@ -1,8 +1,9 @@
 import type { GetServerSidePropsContext } from "next";
 import { getServerSession, type NextAuthOptions } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google";
-import DiscordProvider from "next-auth/providers/discord";
+// import GithubProvider from "next-auth/providers/github";
+// import GoogleProvider from "next-auth/providers/google";
+// import DiscordProvider from "next-auth/providers/discord";
+import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "./db";
 import { serverEnv } from "../env/schema.mjs";
@@ -15,21 +16,26 @@ import { serverEnv } from "../env/schema.mjs";
  **/
 
 const providers = [
-  GoogleProvider({
-    clientId: serverEnv.GOOGLE_CLIENT_ID ?? "",
-    clientSecret: serverEnv.GOOGLE_CLIENT_SECRET ?? "",
-    allowDangerousEmailAccountLinking: true,
-  }),
-  GithubProvider({
-    clientId: serverEnv.GITHUB_CLIENT_ID ?? "",
-    clientSecret: serverEnv.GITHUB_CLIENT_SECRET ?? "",
-    allowDangerousEmailAccountLinking: true,
-  }),
-  DiscordProvider({
-    clientId: serverEnv.DISCORD_CLIENT_ID ?? "",
-    clientSecret: serverEnv.DISCORD_CLIENT_SECRET ?? "",
-    allowDangerousEmailAccountLinking: true,
-  }),
+  // GoogleProvider({
+  //   clientId: serverEnv.GOOGLE_CLIENT_ID ?? "",
+  //   clientSecret: serverEnv.GOOGLE_CLIENT_SECRET ?? "",
+  //   allowDangerousEmailAccountLinking: true,
+  // }),
+  // GithubProvider({
+  //   clientId: serverEnv.GITHUB_CLIENT_ID ?? "",
+  //   clientSecret: serverEnv.GITHUB_CLIENT_SECRET ?? "",
+  //   allowDangerousEmailAccountLinking: true,
+  // }),
+  // DiscordProvider({
+  //   clientId: serverEnv.DISCORD_CLIENT_ID ?? "",
+  //   clientSecret: serverEnv.DISCORD_CLIENT_SECRET ?? "",
+  //   allowDangerousEmailAccountLinking: true,
+  // }),
+  EmailProvider({
+    server: serverEnv.EMAIL_SERVER,
+    from: serverEnv.EMAIL_FROM,
+    //maxAge: 24 * 60 * 60, // 设置邮箱链接失效时间，默认24小时
+  })
 ];
 
 /**

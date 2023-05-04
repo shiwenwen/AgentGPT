@@ -44,6 +44,8 @@ export const serverSchema = z.object({
   GITHUB_CLIENT_SECRET: requiredAuthEnabledForProduction(),
   DISCORD_CLIENT_ID: requiredAuthEnabledForProduction(),
   DISCORD_CLIENT_SECRET: requiredAuthEnabledForProduction(),
+  EMAIL_SERVER: requiredAuthEnabledForProduction(),
+  EMAIL_FROM: requiredAuthEnabledForProduction(),
 
   STRIPE_SECRET_KEY: z.string().optional(),
   STRIPE_WEBHOOK_SECRET: z.string().optional(),
@@ -71,7 +73,8 @@ export const serverEnv = {
   GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
   DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
   DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
-
+  EMAIL_SERVER: process.env.EMAIL_SERVER,
+  EMAIL_FROM: process.env.EMAIL_FROM,
   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
   STRIPE_SUBSCRIPTION_PRICE_ID: process.env.STRIPE_SUBSCRIPTION_PRICE_ID,
